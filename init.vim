@@ -20,7 +20,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'MunifTanjim/nui.nvim'
 
 Plug 'dstein64/nvim-scrollview'
-
+Plug 'windwp/nvim-autopairs'
 
 call plug#end()
 
@@ -62,4 +62,23 @@ require("neo-tree").setup({
 })
 
 require('scrollview').setup()
+
+-- nvim-autopairs kurulumu ve konfigürasyonu (Node.js gerekmez)
+require('nvim-autopairs').setup{
+    check_ts = false, -- Node.js yoksa treesitter opsiyonel
+}
+
+local npairs = require('nvim-autopairs')
+local Rule = require('nvim-autopairs.rule')
+
+-- Süslü parantezlerde Enter tuşunu otomatik davranışa sok
+npairs.add_rules{
+    Rule("{", "}")
+        :with_pair(function() return true end)
+        :with_move(function(opts)
+            return opts.char == "}"
+        end)
+        :use_key("\n")
+}
 EOF
+
