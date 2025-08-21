@@ -22,7 +22,14 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'dstein64/nvim-scrollview'
 Plug 'windwp/nvim-autopairs'
 
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+
+Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
 
@@ -33,19 +40,12 @@ nnoremap <C-l> :UndotreeToggle<CR>
 let g:onedark_config = {'style': 'warmer',}
 colorscheme onedark
 
-inoremap <expr> <Tab> pumvisible() ? "\<C-N>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-P>" : "\<C-H>"
-
-
 let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
 
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-let g:coc_disable_startup_warning = 1
-let g:python_highlight_all = 1
 
 let g:floaterm_position = 'bottom'
 let g:floaterm_height = 0.3
@@ -68,15 +68,14 @@ require("neo-tree").setup({
 
 require('scrollview').setup()
 
--- nvim-autopairs kurulumu ve konfigürasyonu (Node.js gerekmez)
 require('nvim-autopairs').setup{
-    check_ts = false, -- Node.js yoksa treesitter opsiyonel
+    check_ts = false, 
 }
 
 local npairs = require('nvim-autopairs')
 local Rule = require('nvim-autopairs.rule')
 
--- Süslü parantezlerde Enter tuşunu otomatik davranışa sok
+-- Süslü parantezlerde Enter
 npairs.add_rules{
     Rule("{", "}")
         :with_pair(function() return true end)
@@ -85,5 +84,34 @@ npairs.add_rules{
         end)
         :use_key("\n")
 }
+
+
+local cmp = require'cmp'
+local luasnip = require'luasnip'
+
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      luasnip.lsp_expand(args.body)
+    end,
+  },
+  mapping = {
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+    ['<CR>'] = cmp.mapping.confirm({
+        behavior = cmp.ConfirmBehavior.Replace,
+        select = true,
+    }),
+  },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'luasnip' },
+    { name = 'buffer' },
+    { name = 'path' },
+  }
+})
+
+require'lspconfig'.jedi_language_server.setup{}
+
 EOF
 
