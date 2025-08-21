@@ -22,6 +22,8 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'dstein64/nvim-scrollview'
 Plug 'windwp/nvim-autopairs'
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
 call plug#end()
 
 nnoremap <C-t> :Neotree toggle<CR>
@@ -41,6 +43,9 @@ let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
 
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+let g:coc_disable_startup_warning = 1
+let g:python_highlight_all = 1
 
 let g:floaterm_position = 'bottom'
 let g:floaterm_height = 0.3
