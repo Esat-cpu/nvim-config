@@ -95,6 +95,23 @@ cmp.setup({
       luasnip.lsp_expand(args.body)
     end,
   },
+
+  mapping = {
+    ['<Tab>'] = cmp.mapping.select_next_item(),
+    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+
+    ['<CR>'] = cmp.mapping(function(fallback)
+      if cmp.visible() and cmp.get_selected_entry() == nil then
+        cmp.abort()
+      else
+        cmp.confirm({
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = false,
+        })
+      end
+    end, {'i', 's'}),
+  },
+
   mapping = {
     ['<Tab>'] = cmp.mapping.select_next_item(),
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
