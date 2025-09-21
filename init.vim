@@ -2,6 +2,7 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set number
+set list
 
 call plug#begin()
 
@@ -69,7 +70,7 @@ require("neo-tree").setup({
 require('scrollview').setup()
 
 require('nvim-autopairs').setup{
-    check_ts = false, 
+    check_ts = false,
 }
 
 local npairs = require('nvim-autopairs')
