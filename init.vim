@@ -30,9 +30,11 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 
-Plug 'neovim/nvim-lspconfig'
+" Plug 'neovim/nvim-lspconfig'
 
 call plug#end()
+
+autocmd FileType floaterm setlocal nonumber norelativenumber
 
 nnoremap <C-t> :Neotree toggle<CR>
 nnoremap <C-l> :UndotreeToggle<CR>
@@ -51,7 +53,7 @@ nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
 let g:floaterm_position = 'bottom'
 let g:floaterm_height = 0.3
 let g:floaterm_wintype = 'split'
-let g:floaterm_shell = 'powershell.exe'
+" let g:floaterm_shell = 'powershell.exe'
 
 
 lua << EOF
@@ -129,7 +131,7 @@ cmp.setup({
   }
 })
 
-require'lspconfig'.jedi_language_server.setup{}
+-- require'lspconfig'.jedi_language_server.setup{}
 
 EOF
 
