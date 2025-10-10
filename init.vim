@@ -38,6 +38,10 @@ nnoremap <C-t> :Neotree toggle<CR>
 nnoremap <C-l> :UndotreeToggle<CR>
 
 
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+
 let g:onedark_config = {'style': 'warmer',}
 colorscheme onedark
 
