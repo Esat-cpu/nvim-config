@@ -32,6 +32,8 @@ Plug 'hrsh7th/cmp-path'
 
 Plug 'neovim/nvim-lspconfig'
 
+Plug 'romgrk/barbar.nvim', { 'requires': 'nvim-web-devicons' }
+
 call plug#end()
 
 nnoremap <C-t> :Neotree toggle<CR>
@@ -106,25 +108,22 @@ cmp.setup({
     ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
     ['<CR>'] = cmp.mapping(function(fallback)
-      if cmp.visible() and cmp.get_selected_entry() == nil then
-        cmp.abort()
+      if cmp.visible() then
+        local entry = cmp.get_selected_entry()
+        if entry == nil then
+          cmp.abort()   -- öneriler açık ama seçili yoksa kapat
+        else
+          cmp.confirm({
+            behavior = cmp.ConfirmBehavior.Replace,
+            select = false,
+          })
+        end
       else
-        cmp.confirm({
-          behavior = cmp.ConfirmBehavior.Replace,
-          select = false,
-        })
+        fallback()  -- öneriler kapalıysa alt satıra geç
       end
     end, {'i', 's'}),
   },
 
-  mapping = {
-    ['<Tab>'] = cmp.mapping.select_next_item(),
-    ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-    ['<CR>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Replace,
-        select = true,
-    }),
-  },
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
@@ -135,5 +134,15 @@ cmp.setup({
 
 require'lspconfig'.jedi_language_server.setup{}
 
-EOF
+require'barbar'.setup {
+  -- En güncel ikon ayarları
+  icons = {
+    filetype = {
+      enabled = true,
+    },
+  },
+  animation = true,
+  auto_hide = false,}
 
+
+EOF
