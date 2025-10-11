@@ -23,6 +23,3 @@ pip install jedi-language-server
 ```
 
 
-
-> **Not:** Linux'ta `let g:floaterm_shell = 'powershell.exe'` satırını kaldır.
-
