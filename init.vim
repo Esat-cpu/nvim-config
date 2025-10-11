@@ -142,7 +142,73 @@ require'barbar'.setup {
     },
   },
   animation = true,
-  auto_hide = false,}
+  auto_hide = false,
+}
+
+
+
+function SmartCloseBuffer()
+  local current_buf = vim.api.nvim_get_current_buf()
+  local modified = vim.api.nvim_buf_get_option(current_buf, "modified")
+  local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+
+  if modified then
+    local save_choice = vim.fn.confirm("Buffer değişti. Kaydedilsin mi?", "&Evet\n&Hayır\n&İptal", 3)
+    if save_choice == 1 then
+      -- Kaydet ve devam et
+      vim.cmd("write")
+    elseif save_choice == 3 or save_choice == 0 then
+      -- İptal veya ESC basıldı, kapatma işlemi iptal
+      print("Kapatma iptal edildi.")
+      return
+    end
+  end
+
+
+  -- Eğer sadece bir buffer kaldıysa yeni aç sonra kapat
+  if #buffers <= 1 then
+    vim.cmd("enew")
+    vim.cmd("bdelete! " .. current_buf)
+    return
+  end
+
+  -- Başka buffer varsa ona geçip kapat
+  local next_buf = nil
+  for _, buf in ipairs(buffers) do
+    if buf.bufnr ~= current_buf then
+      next_buf = buf.bufnr
+      break
+    end
+  end
+
+  if next_buf then
+    vim.cmd("buffer " .. next_buf)
+    vim.cmd("bdelete! " .. current_buf)
+  else
+    print("Kapatılacak başka buffer bulunamadı.")
+  end
+end
+
+
+vim.api.nvim_set_keymap('n', '<C-e>', ':lua SmartCloseBuffer()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-z>', ':BufferPrevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-x>', ':BufferNext<CR>', { noremap = true, silent = true })
+
+
+
+vim.api.nvim_create_autocmd("BufAdd", {
+  callback = function()
+    local bufs = vim.api.nvim_list_bufs()
+    for _, buf in ipairs(bufs) do
+      local name = vim.api.nvim_buf_get_name(buf)
+      local listed = vim.api.nvim_buf_get_option(buf, "buflisted")
+      if listed and name == "" and vim.api.nvim_buf_is_loaded(buf) then
+        -- "[No Name]" buffer'ı kapat
+        vim.cmd("silent! bdelete " .. buf)
+      end
+    end
+  end,
+})
 
 
 EOF
