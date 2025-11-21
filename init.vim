@@ -60,6 +60,13 @@ let g:floaterm_wintype = 'split'
 let g:floaterm_shell = 'powershell.exe'
 
 
+" home and end key functionality on insert mode
+inoremap <C-Left> <C-o>0
+inoremap <C-Right> <C-o>$
+
+
+
+
 lua << EOF
 require("neo-tree").setup({
   filesystem = {
