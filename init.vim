@@ -63,6 +63,8 @@ let g:floaterm_shell = 'powershell.exe'
 " home and end key functionality on insert mode
 inoremap <C-Left> <C-o>0
 inoremap <C-Right> <C-o>$
+inoremap <M-h> <C-o>0
+inoremap <M-l> <C-o>$
 
 
 
