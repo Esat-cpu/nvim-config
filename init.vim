@@ -68,6 +68,8 @@ inoremap <C-Left> <C-o>0
 inoremap <C-Right> <C-o>$
 inoremap <M-h> <C-o>0
 inoremap <M-l> <C-o>$
+inoremap <M-j> <Esc>ji
+inoremap <M-k> <Esc>ki
 
 
 
