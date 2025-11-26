@@ -203,8 +203,8 @@ end
 
 
 vim.api.nvim_set_keymap('n', '<C-e>', ':lua SmartCloseBuffer()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-z>', ':BufferPrevious<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<C-x>', ':BufferNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-x>', ':BufferPrevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-c>', ':BufferNext<CR>', { noremap = true, silent = true })
 
 
 
