@@ -71,6 +71,7 @@ inoremap <M-l> <C-o>$
 inoremap <M-j> <Esc>ji
 inoremap <M-k> <Esc>ki
 
+nnoremap <C-a> ggVG
 
 
 lua << EOF
