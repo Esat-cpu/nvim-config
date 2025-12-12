@@ -73,6 +73,9 @@ inoremap <M-k> <Esc>ki
 
 nnoremap <C-a> ggVG
 
+nnoremap <C-j> <C-e>
+nnoremap <C-k> <C-y>
+
 
 lua << EOF
 require("neo-tree").setup({
