@@ -78,6 +78,11 @@ nnoremap <C-k> <C-y>
 
 vnoremap y "+y
 
+nnoremap d "_d
+vnoremap d "_d
+
+vnoremap c c<Esc>
+
 
 lua << EOF
 require("neo-tree").setup({
