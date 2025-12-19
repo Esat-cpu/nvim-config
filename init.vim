@@ -67,6 +67,8 @@ nnoremap <leader>t :FloatermToggle<CR>
 tnoremap <C-e> <C-d>
 " toggle
 tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
+" terminal normal mode
+tnoremap <C-n> <C-\><C-n>
 
 
 
