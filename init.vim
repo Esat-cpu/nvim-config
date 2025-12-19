@@ -37,14 +37,11 @@ Plug 'romgrk/barbar.nvim', { 'requires': 'nvim-web-devicons' }
 
 call plug#end()
 
+
 autocmd FileType floaterm setlocal nonumber norelativenumber
 
 nnoremap <C-t> :Neotree toggle<CR>
 nnoremap <C-l> :UndotreeToggle<CR>
-
-
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
 
 
 let g:onedark_config = {'style': 'warmer',}
@@ -63,25 +60,77 @@ let g:floaterm_wintype = 'split'
 " let g:floaterm_shell = 'powershell.exe'
 
 
+
+
+
+let mapleader = " "
+
+" indent selected lines
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
+
 " home and end key functionality on insert mode
 inoremap <C-Left> <C-o>0
 inoremap <C-Right> <C-o>$
 inoremap <M-h> <C-o>0
 inoremap <M-l> <C-o>$
+
+
+" move up and down in insert mode
 inoremap <M-j> <Esc>ji
 inoremap <M-k> <Esc>ki
 
+
+" home and end shortcuts for visual mode
+xnoremap <leader>h <Home>
+xnoremap <leader>l <End>h
+
+" and for normal mode
+nnoremap <leader>h <Home>
+nnoremap <leader>l <End>
+
+
+" shortcuts for half page scrolling in normal mode
+nnoremap <C-s> <C-u>
+
+
+" shortcut for moving the cursor
+nnoremap <leader>f M
+nnoremap <leader>k H
+nnoremap <leader>j L
+
+" shortuct for moving the page depend on cursor
+nnoremap <leader><leader> zz
+
+
+" select all
 nnoremap <C-a> ggVG
 
+
+" scroll page
 nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
 
+
+" yank yankes to clipboard
 vnoremap y "+y
 
-nnoremap d "_d
-vnoremap d "_d
 
-vnoremap c c<Esc>
+" delete only
+xnoremap d "_d
+
+
+" cut and go to normal mode
+xnoremap c c<Esc>
+
+
+xnoremap ( c(<C-r>")<Esc>
+xnoremap <leader>[ c[<C-r>"]<Esc>
+xnoremap <leader>{ c{<C-r>"}<Esc>
+xnoremap <leader>" c"<C-r>""<Esc>
+
+
 
 
 lua << EOF
