@@ -38,6 +38,11 @@ Plug 'romgrk/barbar.nvim', { 'requires': 'nvim-web-devicons' }
 call plug#end()
 
 
+
+let mapleader = " "
+
+
+
 autocmd FileType floaterm setlocal nonumber norelativenumber
 
 nnoremap <C-t> :Neotree toggle<CR>
@@ -51,19 +56,28 @@ let g:floaterm_keymap_new    = '<F7>'
 let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
+
 nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
+nnoremap <F6> :w<CR>:FloatermNew --autoclose=0 gcc % -o z && ./z && rm z<CR>
+
+" terminal
+" open/toggle
+nnoremap <leader>t :FloatermToggle<CR>
+" exit
+tnoremap <C-e> <C-d>
+" toggle
+tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
+
 
 
 let g:floaterm_position = 'bottom'
 let g:floaterm_height = 0.3
 let g:floaterm_wintype = 'split'
-" let g:floaterm_shell = 'powershell.exe'
 
 
 
 
 
-let mapleader = " "
 
 " indent selected lines
 vnoremap <Tab> >gv
