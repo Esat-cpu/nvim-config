@@ -46,6 +46,7 @@ let mapleader = " "
 autocmd FileType floaterm setlocal nonumber norelativenumber
 
 nnoremap <C-t> :Neotree toggle<CR>
+nnoremap T :Neotree toggle<CR>
 nnoremap <C-l> :UndotreeToggle<CR>
 
 
@@ -59,6 +60,7 @@ let g:floaterm_keymap_toggle = '<F12>'
 
 nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
 nnoremap <F6> :w<CR>:FloatermNew --autoclose=0 gcc % -o z && ./z && rm z<CR>
+nnoremap <F2> :w<CR>:FloatermNew --autoclose=0 cargo run<CR>
 
 " terminal
 " open/toggle
@@ -84,6 +86,9 @@ let g:floaterm_wintype = 'split'
 " indent selected lines
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+
+" comment out the selected line
+xmap <leader>y gc
 
 
 " home and end key functionality on insert mode
@@ -112,12 +117,26 @@ nnoremap <C-s> <C-u>
 
 
 " shortcut for moving the cursor
-nnoremap <leader>f M
-nnoremap <leader>k H
-nnoremap <leader>j L
+nnoremap F M
+" for up: H
+" for down: L
 
 " shortuct for moving the page depend on cursor
 nnoremap <leader><leader> zz
+
+
+" manuel page
+nnoremap m K
+xnoremap m K
+nnoremap K k
+xnoremap K k
+
+
+" whatever J is doing
+nnoremap <leader>j J
+xnoremap <leader>j J
+nnoremap J j
+xnoremap J j
 
 
 " select all
