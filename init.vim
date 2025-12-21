@@ -59,7 +59,7 @@ let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
 nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
-nnoremap <F6> :w<CR>:FloatermNew --autoclose=0 gcc % -o z && ./z && rm z<CR>
+nnoremap <F6> :w<CR>:FloatermNew --autoclose=0 gcc % -o z -g -fsanitize=address && {./z; rm z}<CR>
 nnoremap <F2> :w<CR>:FloatermNew --autoclose=0 cargo run<CR>
 
 " terminal
@@ -75,7 +75,7 @@ tnoremap <C-n> <C-\><C-n>
 
 
 let g:floaterm_position = 'bottom'
-let g:floaterm_height = 0.3
+let g:floaterm_height = 0.4
 let g:floaterm_wintype = 'split'
 
 
@@ -99,8 +99,8 @@ inoremap <M-l> <C-o>$
 
 
 " move up and down in insert mode
-inoremap <M-j> <Esc>ji
-inoremap <M-k> <Esc>ki
+inoremap <M-j> <Esc>ja
+inoremap <M-k> <Esc>ka
 
 
 " home and end shortcuts for visual mode
@@ -114,6 +114,10 @@ nnoremap <leader>l <End>
 
 " shortcuts for half page scrolling in normal mode
 nnoremap <C-s> <C-u>
+nnoremap M <C-d>
+nnoremap P <C-u>
+
+nnoremap <leader>p P
 
 
 " shortcut for moving the cursor
@@ -165,6 +169,12 @@ xnoremap <leader>[ c[<C-r>"]<Esc>
 xnoremap <leader>{ c{<C-r>"}<Esc>
 xnoremap <leader>" c"<C-r>""<Esc>
 
+
+nnoremap , <C-w>
+
+
+inoremap <M-f> <Esc>
+xnoremap <M-f> <Esc>
 
 
 
