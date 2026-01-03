@@ -112,13 +112,16 @@ nnoremap <leader>h <Home>
 nnoremap <leader>l <End>
 
 
-" shortcuts for half page scrolling in normal mode
+" shortcuts for half page scrolling
 nnoremap <C-s> <C-u>
 nnoremap M <C-d>
 nnoremap P <C-u>
+xnoremap P <C-u>
+xnoremap M <C-d>
 
 nnoremap <leader>p P
 
+xnoremap F M
 
 " shortcut for moving the cursor
 nnoremap F M
@@ -158,6 +161,7 @@ vnoremap y "+y
 
 " delete only
 xnoremap d "_d
+nnoremap D "_D
 
 
 " cut and go to normal mode
@@ -169,6 +173,8 @@ xnoremap <leader>[ c[<C-r>"]<Esc>
 xnoremap <leader>{ c{<C-r>"}<Esc>
 xnoremap <leader>" c"<C-r>""<Esc>
 
+nnoremap f <Nul>
+nnoremap <leader>f f
 
 nnoremap , <C-w>
 
