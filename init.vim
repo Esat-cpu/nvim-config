@@ -31,7 +31,8 @@ Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 
 
-" Plug 'neovim/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
+Plug 'rust-lang/rust.vim'
 
 Plug 'romgrk/barbar.nvim', { 'requires': 'nvim-web-devicons' }
 
@@ -183,6 +184,9 @@ inoremap <M-f> <Esc>
 xnoremap <M-f> <Esc>
 
 
+" toggle lsp
+nnoremap <leader>x :lua toggle_lsp()<CR>
+
 
 lua << EOF
 require("neo-tree").setup({
@@ -256,7 +260,34 @@ cmp.setup({
   }
 })
 
--- require'lspconfig'.jedi_language_server.setup{}
+
+
+
+-- LSP
+vim.lsp.config("rust-analyzer", {
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+  root_markers = { "Cargo.toml", ".git" },
+
+  settings = {
+    ["rust-analyzer"] = {
+      cargo = {
+        allFeatures = true,
+      },
+      checkOnSave = true,
+      check = {
+        command = "clippy",
+      },
+    },
+  },
+})
+
+
+vim.lsp.enable("jedi_language_server")
+vim.lsp.enable("rust-analyzer")
+
+
+
 
 require'barbar'.setup {
   -- En güncel ikon ayarları
@@ -334,6 +365,35 @@ vim.api.nvim_create_autocmd("BufAdd", {
     end
   end,
 })
+
+
+
+-- Toggle lsp function
+_G.toggle_lsp = function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+
+  if #clients > 0 then
+    vim.lsp.stop_client(clients)
+    vim.notify("LSP stopped", vim.log.levels.WARN)
+  else
+    -- Determine the server depends on filetype
+    local ft = vim.bo[bufnr].filetype
+    local server = nil
+    if ft == "rust" then
+      server = "rust-analyzer"
+    elseif ft == "python" then
+      server = "jedi-language-server"
+    end
+
+    if server then
+      vim.lsp.enable(server)
+      vim.notify(server .. " enabled", vim.log.levels.INFO)
+    else
+      vim.notify("No LSP configured for this filetype: " .. ft, vim.log.levels.WARN)
+    end
+  end
+end
 
 
 
