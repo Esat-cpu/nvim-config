@@ -169,10 +169,11 @@ nnoremap D "_D
 xnoremap c c<Esc>
 
 
-xnoremap ( c(<C-r>")<Esc>
+xnoremap <leader>( c(<C-r>")<Esc>
 xnoremap <leader>[ c[<C-r>"]<Esc>
 xnoremap <leader>{ c{<C-r>"}<Esc>
 xnoremap <leader>" c"<C-r>""<Esc>
+xnoremap <leader>' c'<C-r>"'<Esc>
 
 nnoremap f <Nul>
 nnoremap <leader>f f
@@ -285,6 +286,20 @@ vim.lsp.config("rust-analyzer", {
 
 vim.lsp.enable("jedi_language_server")
 vim.lsp.enable("rust-analyzer")
+
+
+vim.api.nvim_set_keymap('n', '<leader>e',
+    '<cmd>lua vim.lsp.buf.hover()<CR>',
+    { noremap = true, silent = true }
+)
+
+vim.api.nvim_set_keymap(
+  'n',
+  '<leader>d',
+  '<cmd>lua vim.diagnostic.open_float()<CR>',
+  { noremap = true, silent = true }
+)
+
 
 
 
