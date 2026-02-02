@@ -84,6 +84,10 @@ let g:floaterm_wintype = 'split'
 
 
 
+set clipboard=unnamedplus
+
+
+
 " indent selected lines
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
@@ -104,28 +108,29 @@ inoremap <M-j> <Esc>ja
 inoremap <M-k> <Esc>ka
 
 
-" home and end shortcuts for visual mode
-xnoremap <leader>h <Home>
-xnoremap <leader>l <End>h
-
-" and for normal mode
+" home and end shortcuts
 nnoremap <leader>h <Home>
 nnoremap <leader>l <End>
+vnoremap <leader>h <Home>
+vnoremap <leader>l <End>h
 
 
 " shortcuts for half page scrolling
 nnoremap <C-s> <C-u>
 nnoremap M <C-d>
 nnoremap P <C-u>
-xnoremap P <C-u>
-xnoremap M <C-d>
+vnoremap P <C-u>
+vnoremap M <C-d>
 
 nnoremap <leader>p P
+vnoremap <leader>p P
 
-xnoremap F M
+vnoremap F M
+vnoremap <leader>F F
 
 " shortcut for moving the cursor
 nnoremap F M
+nnoremap <leader>F F
 " for up: H
 " for down: L
 
@@ -135,20 +140,25 @@ nnoremap <leader><leader> zz
 
 " manuel page
 nnoremap m K
-xnoremap m K
+vnoremap m K
 nnoremap K k
-xnoremap K k
+vnoremap K k
 
 
 " whatever J is doing
 nnoremap <leader>j J
-xnoremap <leader>j J
+vnoremap <leader>j J
 nnoremap J j
-xnoremap J j
+vnoremap J j
 
 
 " select all
 nnoremap <C-a> ggVG
+
+
+" redo
+nnoremap R <C-r>
+nnoremap <leader>R R
 
 
 " scroll page
@@ -156,37 +166,39 @@ nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
 
 
-" yank yankes to clipboard
-vnoremap y "+y
-
-
 " delete only
-xnoremap d "_d
+nnoremap d "_d
+vnoremap d "_d
 nnoremap D "_D
+vnoremap D "_D
 
 
 " cut and go to normal mode
-xnoremap c c<Esc>
+nnoremap c c<Esc>
+vnoremap c c<Esc>
 
 
-xnoremap <leader>( c(<C-r>")<Esc>
-xnoremap <leader>[ c[<C-r>"]<Esc>
-xnoremap <leader>{ c{<C-r>"}<Esc>
-xnoremap <leader>" c"<C-r>""<Esc>
-xnoremap <leader>' c'<C-r>"'<Esc>
+vnoremap <leader>( c(<C-r>")<Esc>
+vnoremap <leader>[ c[<C-r>"]<Esc>
+vnoremap <leader>{ c{<C-r>"}<Esc>
+vnoremap <leader>" c"<C-r>""<Esc>
+vnoremap <leader>' c'<C-r>"'<Esc>
 
 nnoremap f <Nul>
 nnoremap <leader>f f
 
 nnoremap , <C-w>
+nnoremap <leader>w <C-w>
 
 
 inoremap <M-f> <Esc>
-xnoremap <M-f> <Esc>
+vnoremap <M-f> <Esc>
 
 
 " toggle lsp
 nnoremap <leader>x :lua toggle_lsp()<CR>
+
+
 
 
 lua << EOF
