@@ -277,6 +277,8 @@ cmp.setup({
 
 
 -- LSP
+
+-- Rust
 vim.lsp.config("rust-analyzer", {
   cmd = { "rust-analyzer" },
   filetypes = { "rust" },
@@ -296,8 +298,27 @@ vim.lsp.config("rust-analyzer", {
 })
 
 
-vim.lsp.enable("jedi_language_server")
 vim.lsp.enable("rust-analyzer")
+
+-- Python
+vim.lsp.config.pylsp = {
+  cmd = {"pylsp"},
+  settings = {
+    pylsp = {
+      plugins = {
+        pyflakes = { enabled = true },
+        pycodestyle = {
+          enabled = true,
+          ignore = {"E501"}
+        },
+      },
+    },
+  },
+}
+
+vim.lsp.enable("pylsp")
+
+
 
 
 vim.api.nvim_set_keymap('n', '<leader>e',
@@ -410,7 +431,7 @@ _G.toggle_lsp = function()
     if ft == "rust" then
       server = "rust-analyzer"
     elseif ft == "python" then
-      server = "jedi-language-server"
+      server = "python-lsp-server"
     end
 
     if server then
