@@ -19,7 +19,7 @@ Windows:
 ## Python LSP
 
 ```bash
-pip install jedi-language-server
+pip install python-lsp-server
 ```
 
 
