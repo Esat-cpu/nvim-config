@@ -115,25 +115,6 @@ vnoremap <leader>h <Home>
 vnoremap <leader>l <End>h
 
 
-" shortcuts for half page scrolling
-nnoremap <C-s> <C-u>
-nnoremap M <C-d>
-nnoremap P <C-u>
-vnoremap P <C-u>
-vnoremap M <C-d>
-
-nnoremap <leader>p P
-vnoremap <leader>p P
-
-vnoremap F M
-vnoremap <leader>F F
-
-" shortcut for moving the cursor
-nnoremap F M
-nnoremap <leader>F F
-" for up: H
-" for down: L
-
 " shortuct for moving the page depend on cursor
 nnoremap <leader><leader> zz
 
@@ -141,15 +122,18 @@ nnoremap <leader><leader> zz
 " manuel page
 nnoremap m K
 vnoremap m K
-nnoremap K k
-vnoremap K k
+nnoremap K <C-u>
+vnoremap K <C-u>
 
 
 " whatever J is doing
 nnoremap <leader>j J
 vnoremap <leader>j J
-nnoremap J j
-vnoremap J j
+nnoremap J <C-d>
+vnoremap J <C-d>
+
+" I hope I won't need triple j's
+inoremap jjj <Esc>
 
 
 " select all
@@ -164,6 +148,8 @@ nnoremap <leader>R R
 " scroll page
 nnoremap <C-j> <C-e>
 nnoremap <C-k> <C-y>
+vnoremap <C-j> <C-e>
+vnoremap <C-k> <C-y>
 
 
 " delete only
@@ -186,6 +172,10 @@ vnoremap <leader>' c'<C-r>"'<Esc>
 
 nnoremap f <Nul>
 nnoremap <leader>f f
+nnoremap F M
+vnoremap F M
+nnoremap <leader>F F
+vnoremap <leader>F F
 
 nnoremap , <C-w>
 nnoremap <leader>w <C-w>
@@ -307,10 +297,7 @@ vim.lsp.config.pylsp = {
     pylsp = {
       plugins = {
         pyflakes = { enabled = true },
-        pycodestyle = {
-          enabled = true,
-          ignore = {"E501"}
-        },
+        pycodestyle = { enabled = false },
       },
     },
   },
