@@ -132,9 +132,6 @@ vnoremap <leader>j J
 nnoremap J <C-d>
 vnoremap J <C-d>
 
-" I hope I won't need triple j's
-inoremap jjj <Esc>
-
 
 " select all
 nnoremap <C-a> ggVG
@@ -164,23 +161,25 @@ nnoremap c c<Esc>
 vnoremap c c<Esc>
 
 
+" Parentheses
 vnoremap <leader>( c(<C-r>")<Esc>
 vnoremap <leader>[ c[<C-r>"]<Esc>
 vnoremap <leader>{ c{<C-r>"}<Esc>
 vnoremap <leader>" c"<C-r>""<Esc>
 vnoremap <leader>' c'<C-r>"'<Esc>
 
-nnoremap f <Nul>
-nnoremap <leader>f f
+
+" F
 nnoremap F M
 vnoremap F M
 nnoremap <leader>F F
 vnoremap <leader>F F
 
+"
 nnoremap , <C-w>
 nnoremap <leader>w <C-w>
 
-
+"
 inoremap <M-f> <Esc>
 vnoremap <M-f> <Esc>
 
