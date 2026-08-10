@@ -379,12 +379,13 @@ function SmartCloseBuffer()
     return
   end
 
-  -- Başka buffer varsa ona geçip kapat
+  -- Başka buffer varsa en son açılan (MRU) olana geçip kapat
   local next_buf = nil
+  local last_used = -1
   for _, buf in ipairs(buffers) do
-    if buf.bufnr ~= current_buf then
+    if buf.bufnr ~= current_buf and buf.lastused and buf.lastused > last_used then
       next_buf = buf.bufnr
-      break
+      last_used = buf.lastused
     end
   end
 
@@ -396,10 +397,16 @@ function SmartCloseBuffer()
   end
 end
 
-
+-- Close Buffer
 vim.api.nvim_set_keymap('n', '<C-e>', ':lua SmartCloseBuffer()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>q', ':lua SmartCloseBuffer()<CR>', { noremap = true, silent = true })
+
+-- Buffer prev/next
 vim.api.nvim_set_keymap('n', '<C-x>', ':BufferPrevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-c>', ':BufferNext<CR>', { noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n', '<leader>s', ':BufferPrevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>g', ':BufferNext<CR>', { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n', '<M-Left>', ':BufferPrevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<M-Right>', ':BufferNext<CR>', { noremap = true, silent = true })
