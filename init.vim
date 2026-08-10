@@ -201,6 +201,12 @@ require("neo-tree").setup({
         hide_gitignored = false, -- Show .gitignored files
     },
   },
+
+  vim.api.nvim_create_autocmd("TermLeave", {
+      callback = function()
+        require("neo-tree.sources.manager").refresh("filesystem")
+      end,
+  }),
 })
 
 require('scrollview').setup()
