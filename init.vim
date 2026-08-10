@@ -120,8 +120,10 @@ nnoremap <leader><leader> zz
 
 
 " manuel page
-nnoremap m K
-vnoremap m K
+nnoremap <leader>m K
+vnoremap <leader>m K
+
+" half page up
 nnoremap K <C-u>
 vnoremap K <C-u>
 
@@ -134,7 +136,7 @@ vnoremap J <C-d>
 
 
 " select all
-nnoremap <C-a> ggVG
+nnoremap <leader>a ggVG
 
 
 " redo
@@ -311,8 +313,16 @@ vim.lsp.config.pylsp = {
 vim.lsp.enable("pylsp")
 
 
+-- C/C++
+vim.lsp.config("clangd", {
+  cmd = { "clangd", "--background-index" },
+  filetypes = { "c", "cpp" },
+  root_markers = { "compile_commands.json", ".git" },
+})
+vim.lsp.enable("clangd")
 
 
+-- LSP keymaps
 vim.api.nvim_set_keymap('n', '<leader>e',
     '<cmd>lua vim.lsp.buf.hover()<CR>',
     { noremap = true, silent = true }
@@ -325,10 +335,13 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
+vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>c', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
 
 
-
+-- Icons
 require'barbar'.setup {
   -- En güncel ikon ayarları
   icons = {
@@ -340,7 +353,7 @@ require'barbar'.setup {
   auto_hide = false,}
 
 
-
+-- Closing modified buffer
 function SmartCloseBuffer()
   local current_buf = vim.api.nvim_get_current_buf()
   local modified = vim.api.nvim_buf_get_option(current_buf, "modified")
@@ -424,6 +437,8 @@ _G.toggle_lsp = function()
       server = "rust-analyzer"
     elseif ft == "python" then
       server = "python-lsp-server"
+    elseif ft == "c" or ft == "cpp" then
+      server = "clangd"
     end
 
     if server then
