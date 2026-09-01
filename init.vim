@@ -59,9 +59,9 @@ let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
-nnoremap <F5> :w<CR>:FloatermNew --autoclose=0 python3 %<CR>
-nnoremap <F6> :w<CR>:FloatermNew --autoclose=0 gcc % -o z -g -fsanitize=address && {./z; rm z}<CR>
-nnoremap <F2> :w<CR>:FloatermNew --autoclose=0 cargo run<CR>
+nnoremap <F5> :w<CR>:FloatermNew --autoclose=never python3 %<CR>
+nnoremap <F6> :w<CR>:FloatermNew --autoclose=never gcc % -o z -g -fsanitize=address && { ./z; rm z; }<CR>
+nnoremap <F2> :w<CR>:FloatermNew --autoclose=never cargo run<CR>
 
 " terminal
 " open/toggle
