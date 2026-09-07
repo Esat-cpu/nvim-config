@@ -39,9 +39,7 @@ Plug 'romgrk/barbar.nvim', { 'requires': 'nvim-web-devicons' }
 call plug#end()
 
 
-
 let mapleader = " "
-
 
 
 autocmd FileType floaterm setlocal nonumber norelativenumber
@@ -59,6 +57,7 @@ let g:floaterm_keymap_prev   = '<F8>'
 let g:floaterm_keymap_next   = '<F9>'
 let g:floaterm_keymap_toggle = '<F12>'
 
+" Shortcuts for running codes
 nnoremap <F5> :w<CR>:FloatermNew --autoclose=never python3 %<CR>
 nnoremap <F6> :w<CR>:FloatermNew --autoclose=never gcc % -o z -g -fsanitize=address && { ./z; rm z; }<CR>
 nnoremap <F2> :w<CR>:FloatermNew --autoclose=never cargo run<CR>
@@ -74,18 +73,12 @@ tnoremap <C-t> <C-\><C-n>:FloatermToggle<CR>
 tnoremap <C-n> <C-\><C-n>
 
 
-
 let g:floaterm_position = 'bottom'
 let g:floaterm_height = 0.4
 let g:floaterm_wintype = 'split'
 
 
-
-
-
-
 set clipboard=unnamedplus
-
 
 
 " indent selected lines
@@ -136,7 +129,7 @@ vnoremap J <C-d>
 
 
 " select all
-nnoremap <leader>a ggVG
+nnoremap <M-a> ggVG
 
 
 " redo
@@ -190,6 +183,9 @@ vnoremap <M-f> <Esc>
 nnoremap <leader>x :lua toggle_lsp()<CR>
 
 
+" center search results
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 
 lua << EOF
@@ -456,7 +452,6 @@ _G.toggle_lsp = function()
     end
   end
 end
-
 
 
 EOF
