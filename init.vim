@@ -110,6 +110,7 @@ vnoremap <leader>l <End>h
 
 " shortuct for moving the page depend on cursor
 nnoremap <leader><leader> zz
+vnoremap <leader><leader> zz
 
 
 " manuel page
@@ -151,9 +152,16 @@ nnoremap D "_D
 vnoremap D "_D
 
 
+" change but don't copy to clipboard
+nnoremap c "_c
+vnoremap c "_c
+nnoremap C "_C
+vnoremap C "_C
+
+
 " cut and go to normal mode
-nnoremap c c<Esc>
-vnoremap c c<Esc>
+nnoremap <leader>c c<Esc>
+vnoremap <leader>c c<Esc>
 
 
 " Parentheses
@@ -333,8 +341,7 @@ vim.api.nvim_set_keymap(
 
 vim.api.nvim_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>c', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
-
+vim.api.nvim_set_keymap('n', '<leader><', '<cmd>lua vim.lsp.buf.code_action()<CR>', { noremap = true, silent = true })
 
 
 -- Icons
